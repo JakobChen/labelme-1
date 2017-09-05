@@ -4,7 +4,11 @@ import json
 import os.path as osp
 import glob as gb
 import PIL.Image
+import argparse
+import numpy as np
 
+import sys
+sys.path.append('../')
 from labelme import utils
 
 
@@ -32,21 +36,34 @@ def our_labelme_shapes_to_label(img_shape, shapes):
 
 
 def main():
+    '''
+    batch convert json to signle channel labels 
+    src_path: the file path for json file
+    target_path: the file path for labels out
+
+    e.g.
+        python batch_color_map.py labels out
+    format:
+        python batch_color_map.py [src_path] [target_path]
+    '''
 
     parser = argparse.ArgumentParser()
     parser.add_argument('src_path')
     parser.add_argument('target_path')
-    args = parser.parser_args()
+    args = parser.parse_args()
+
+    src_path = args.src_path
+    target_path = args.target_path
     pattern = '\*.json'
 
     for jpath in gb.glob(src_path + pattern):
         json_name = jpath.split('\\')[-1].split('.')[0]
-        data = json.load(open(json))
+        data = json.load(open(jpath))
         
         img = utils.img_b64_to_array(data['imageData'])
         lbl, lbl_names = our_labelme_shapes_to_label(img.shape, data['shapes'])
 
-        PIL.Image.fromarray(lbl).save(osp.join(out_dir, json_name+'_label.png'))
+        PIL.Image.fromarray(lbl).save(osp.join(target_path, json_name+'_label.png'))
         print('wrote  %s' % json_name)
 
     print('done...')
