@@ -77,7 +77,7 @@ def main():
         im_rgb = Image.fromarray(im_rgb)
         im_rgb.save(target_path + '\\' +  file_name + '.jpg')
 
-    print("done...")
+    print('done...')
 
 
 
