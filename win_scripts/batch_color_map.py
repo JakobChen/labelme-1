@@ -75,7 +75,7 @@ def main():
                 im_rgb[i,j] = cmap[im[i,j]]
         
         im_rgb = Image.fromarray(im_rgb)
-        im_rgb.save(target_path + '\\' +  file_name + '.jpg')
+        im_rgb.save(target_path + '\\' +  file_name + '.png')
 
     print('done...')
 

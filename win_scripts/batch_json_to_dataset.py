@@ -42,9 +42,9 @@ def main():
     target_path: the file path for labels out
 
     e.g.
-        python batch_color_map.py labels out
+        python batch_json_to_dataset.py json labels
     format:
-        python batch_color_map.py [src_path] [target_path]
+        python batch_json_to_dataset.py [src_path] [target_path]
     '''
 
     parser = argparse.ArgumentParser()
